@@ -26,7 +26,7 @@ public class Emp02Dao {
 	public List<Emp02Vo> selectAll() throws SQLException {
 		String sql="select * from emp02";
 		List<Emp02Vo> list=new ArrayList();
-		try (Connection conn=dataSource.getConnection()) {
+		try (Connection conn=dataSource.getConnection()) {   // Connection 이 closeable 인터페이스를 구현하고 있어서, auto close 된다
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			ResultSet rs=pstmt.executeQuery();
 			

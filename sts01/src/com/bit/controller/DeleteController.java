@@ -7,12 +7,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.bit.model.Emp02Dao;
+import com.bit.model.Emp02Dao2;
 
 public class DeleteController implements Controller {
-	Emp02Dao dao=new Emp02Dao();
+	Emp02Dao2 dao;
 	
 	
-	public void setDao(Emp02Dao dao) {
+	public void setDao(Emp02Dao2 dao) {
 		this.dao = dao;
 	}
 	

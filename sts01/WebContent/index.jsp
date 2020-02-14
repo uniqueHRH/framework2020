@@ -6,16 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
-	window.location.href='index.bit'
-	
+	window.location.href="index.bit";
 </script>
 </head>
 <body>
-	<nav>
-		<a href="index.bit">HOME</a>
-		<a href="list.bit">B B S</a>
-		<a href="login.bit">LOGIN</a>
-	</nav>
 </body>
 </html>

@@ -30,6 +30,12 @@
 	    <artifactId>spring-core</artifactId>
 	    <version>3.1.4.RELEASE</version>
 	</dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>3.1.4.RELEASE</version>
+	</dependency>
 
 	<dependency>
 		<groupId>com.oracle.jdbc</groupId>
