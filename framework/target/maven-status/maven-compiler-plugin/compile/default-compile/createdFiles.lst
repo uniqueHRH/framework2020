@@ -1,0 +1,5 @@
+com\bit\framework\JdbcTemplate.class
+com\bit\framework\RowMapper.class
+com\bit\framework\DispatchServlet.class
+com\bit\framework\BitController.class
+com\bit\framework\BitHandleMapping.class

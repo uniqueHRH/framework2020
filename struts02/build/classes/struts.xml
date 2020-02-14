@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+
+     <struts>
+     	<package name="default" extends="struts-default">
+     		<action name="ex01" class="com.bit.action.Ex01Action">   <!-- name : url / class : controller-->
+		     	<result name="error">/err.jsp</result>
+		     	<result name="success">/ex01.jsp</result>
+     		</action>
+     		<action name="ex02" class="com.bit.action.Ex02Action">
+     			<interceptor-ref name="params"></interceptor-ref>   <!-- setter 를 이용해 값을 받아온다 -->
+     			<result>/ex02.jsp</result>
+     		</action>
+     	</package>
+     	<package name="p2" namespace="/test" extends="default">   <!-- default 패키지가 struts default 를 상속받았으니, p2 는 이중으로 상속받을 수 있는셈 -->
+     		<action name="ex01" class="com.bit.action.Ex03Action">
+     			<result name="success">/ex03.jsp</result>
+     		</action>
+     		<action name="ex02" class="com.bit.action.Ex04Action">
+     			<interceptor-ref name="params"></interceptor-ref>   <!-- parameter 를 받을 때 사용하는 태그 -->
+      			<result>/ex01.jsp</result>    <!-- 현재 경로에서(/test) ex01.jsp 로 이동 -->
+<!--      			<result type="redirect">/ex01.jsp</result>   다시 (redirect) ex01.jsp 로 이동 -->
+     			<result type="redirect">/ex02.action?id=admin</result>
+     		</action>
+     	</package>
+     </struts>
+     
+<!-- 
+	package
+	 - name, extends, namespace, abstrace, externalReferenceResolver 옵션
+	 
+	namespace
+	 - contextPath 와 action 사이에 정의할 수 있는 이름
+	 - 경로 중간에 포함되어야 하는 이름
+	 - 가능하면 꼭 써주는 게 좋다
+	 - /* : 와일드라고 생각할 수 있지만, 이렇게만 적어주면 에러
+	 - http://localhost:8080/[context]/[namespace]/[action]
+	
+	result type
+	 - default : dispatcher
+ -->

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" 
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<!-- ibatis 는 회사가 자주 바꼈기 때문에, 잘 확인해서 올려야한다 -->
+
+
+	<sqlMapConfig>
+		<transactionManager type="JDBC">   <!-- Connection 역할 -->
+			<dataSource type="SIMPLE">
+				<property name="JDBC.Driver" value="oracle.jdbc.OracleDriver" />
+				<property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="JDBC.Username" value="scott" />
+				<property name="JDBC.Password" value="tiger"/>
+			</dataSource>
+		</transactionManager>
+		<sqlMap resource="bbs/Query.xml" />   <!-- 파일을 불러와 저장만 시켜놓는 곳 -->
+	</sqlMapConfig>

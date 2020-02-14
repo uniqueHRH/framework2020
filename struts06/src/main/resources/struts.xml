@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+    <struts>
+    	<package name="bit" extends="struts-default">
+    		<action name="home" class="com.bit.action.BbsAction">   <!-- BbsAction 의 execute 를 통해 화면 출력 -->
+    			<result>/home.jsp</result>
+    		</action>
+    		<action name="intro">
+    			<result>/intro.jsp</result>
+    		</action>
+    	</package>
+    	<!-- 데이터베이스와 연동할 때, method 필요 -->
+    	<package name="bbs" namespace="/bbs" extends="bit">
+    		<action name="list" class="com.bit.action.BbsAction" method="list">   <!-- BbsAction 의 list 메소드를 통해 화면 출력 -->
+    			<result>/bbs/list.jsp</result>
+    		</action>
+    		<action name="add" class="com.bit.action.BbsAction">
+    			<result>/bbs/add.jsp</result>
+    		</action>
+    		<action name="insert" class="com.bit.action.BbsAction" method="insert">
+    			<result type="redirectAction">list</result>
+    		</action>
+    		<action name="detail" class="com.bit.action.BbsAction" method="detail">
+    			<result>/bbs/edit.jsp</result>
+    		</action>
+    		<action name="update" class="com.bit.action.BbsAction" method="update">
+    			<result type="redirectAction">   <!-- detail 로 돌아갈 때 필요한, 파라미터를 받아온다 -->
+	    			<param name="bean.sabun">${bean.sabun }</param>   <!-- list 에서 받아온 파라미터 -->
+	    			<param name="actionName">detail</param>
+	    		</result>
+    		</action>
+    		<action name="delete" class="com.bit.action.BbsAction" method="delete">
+    			<result>/bbs.list.jsp</result>
+    		</action>
+    	</package>
+    </struts>

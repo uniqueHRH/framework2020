@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+    <!-- 
+    	아래 경로에서 위의 DOCTYPE 스키마를 가져온다
+    	오래 열어놓으면 에러나니까, 복사하고 바로 닫기
+    	
+    	Web App Libraries
+    	> struts2-core-2.3.37.jar
+    	> struts-defaults.xml
+     -->
+     
+     
+     <struts>
+     	<package name="default" extends="struts-default">   <!-- package : 많은 종류의 action 을 끼리끼리 묶어놓은 것 -->
+     		<action name="test01" class="com.bit.action.Ex01Action">   <!-- action name = url / class = controller-->
+		     	<result>/ex01.jsp</result>   <!-- 이동할 페이지 명 -->
+     		</action>
+     	</package>
+     </struts>
