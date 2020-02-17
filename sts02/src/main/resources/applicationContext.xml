@@ -4,11 +4,91 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-	<bean id="Tv" class="com.bit.service.Tv"></bean>
-	<bean id="Radio" class="com.bit.service.Radio"></bean>
+<!-- Remote -->
+<!-- 	<bean id="Tv" class="com.bit.service.Tv"></bean>
+	<bean id="Radio" class="com.bit.service.Radio"></bean> -->
 	
+<!-- setter 를 이용한 주입
 	<bean id="remote" class="com.bit.service.Remote">
 		<property name="remote" ref="radio"/>
-	</bean>
+	</bean> -->
 	
+<!-- 생성자를 이용한 주입
+	 <bean id="remote" class="com.bit.service.Remote">
+		<constructor-arg ref="tv"></constructor-arg>
+	</bean> -->
+	
+	
+	
+<!-- Remote2 -->
+	<!-- <bean id="remote" class="com.bit.service.Remote2">
+		<property name="msg" value="abcdefg"></property>
+		<property name="num" value="1000"></property>
+		<property name="tf" value="true"></property>
+	</bean> -->
+	
+	
+<!-- Remote3 -->
+<!-- array -->
+	<!-- <bean id="remtee" class="com.bit.service.Remote3">
+		<property name="arr">
+			<array>
+				<value>a</value>
+				<value>ab</value>
+				<value>abc</value>
+				<value>abcd</value>
+			</array>
+		</property>
+	</bean> -->
+	
+	
+<!-- ArrayList -->
+<!-- 	<bean id="remote" class="com.bit.service.Remote3">
+		<property name="alist">
+			<list>
+				<value>a</value>
+				<value>ab</value>
+				<value>abc</value>
+				<value>abcd</value>
+			</list>
+		</property>
+	</bean> -->
+	
+	
+<!-- Set -->
+	<!-- <bean id="remote" class="com.bit.service.Remote3">
+		<property name="set">
+			<set>
+				<value>a</value>
+				<value>ab</value>
+				<value>abc</value>
+				<value>abcd</value>
+			</set>
+		</property>
+	</bean> -->
+	
+	
+	<bean id="remote" class="com.bit.service.Remote3" scope="singleton">   <!-- scope 는 default / 싱글톤 -->
+		<property name="map">
+		<!-- map 방식의 두가지 방법 -->
+			<!-- <map>
+				<entry key="key1">
+					<value>val1</value>
+				</entry>
+				<entry key="key2">
+					<value>val2</value>
+				</entry>
+				<entry key="key3">
+					<value>val3</value>
+				</entry>
+			</map> -->
+			
+			<props>
+				<prop key="key1">value1</prop>
+				<prop key="key1">value2</prop>
+				<prop key="key1">value3</prop>
+				<prop key="key1">value4</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

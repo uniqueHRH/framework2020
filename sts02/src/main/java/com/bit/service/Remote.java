@@ -6,14 +6,14 @@ public class Remote {
 	
 	
 //	1. setter 를 이용한 주입
-	public void setRemote(Machine remote) {
-		this.remote = remote;
-	}
+//	public void setRemote(Machine remote) {
+//		this.remote = remote;
+//	}
 
 //	2. 생성자를 이용한 주입
-//	public Remote(Machine machine) {
-//		remote=machine;
-//	}
+	public Remote(Machine machine) {
+		remote=machine;
+	}
 	
 
 	
