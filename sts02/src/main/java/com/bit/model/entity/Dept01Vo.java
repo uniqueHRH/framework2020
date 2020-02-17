@@ -4,7 +4,10 @@ public class Dept01Vo {
 
 	private int deptno;
 	private String dname;
-	private 	String loc;
+	private String loc;
+	
+	
+	
 	public int getDeptno() {
 		return deptno;
 	}

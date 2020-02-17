@@ -15,22 +15,22 @@
 	
 <!-- 생성자를 이용한 주입
 	 <bean id="remote" class="com.bit.service.Remote">
-		<constructor-arg ref="tv"></constructor-arg>
+		<constructor-arg ref="tv"/>
 	</bean> -->
 	
 	
 	
 <!-- Remote2 -->
 	<!-- <bean id="remote" class="com.bit.service.Remote2">
-		<property name="msg" value="abcdefg"></property>
-		<property name="num" value="1000"></property>
-		<property name="tf" value="true"></property>
+		<property name="msg" value="abcdefg"/>
+		<property name="num" value="1000"/>
+		<property name="tf" value="true"/>
 	</bean> -->
 	
 	
 <!-- Remote3 -->
 <!-- array -->
-	<!-- <bean id="remtee" class="com.bit.service.Remote3">
+	<!-- <bean id="remote" class="com.bit.service.Remote3">
 		<property name="arr">
 			<array>
 				<value>a</value>
@@ -67,9 +67,9 @@
 		</property>
 	</bean> -->
 	
-	
-	<bean id="remote" class="com.bit.service.Remote3" scope="singleton">   <!-- scope 는 default / 싱글톤 -->
-		<property name="map">
+	<!-- 
+	<bean id="remote" class="com.bit.service.Remote3" scope="singleton">   scope 는 default / 싱글톤
+		<property name="map"> -->
 		<!-- map 방식의 두가지 방법 -->
 			<!-- <map>
 				<entry key="key1">
@@ -83,12 +83,48 @@
 				</entry>
 			</map> -->
 			
-			<props>
+			<!-- <props>
 				<prop key="key1">value1</prop>
 				<prop key="key1">value2</prop>
 				<prop key="key1">value3</prop>
 				<prop key="key1">value4</prop>
 			</props>
 		</property>
+	</bean> -->
+	
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/class03"/>
+		<property name="username" value="scott2"/>
+		<property name="password" value="Hhr920728"/>
 	</bean>
+	
+	<bean id="jdbcTemplate" 
+		class="org.springframework.jdbc.core.JdbcTemplate">
+			<property name="dataSource" ref="dataSource"></property>		
+		</bean>
+	
+	<bean id="dept01Dao1" class="com.bit.model.Dept01DaoImpl">
+			<property name="dataSource" ref="dataSource"></property>		
+	</bean>
+	<bean id="dept01Dao2" class="com.bit.model.Dept01Dao2Impl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
