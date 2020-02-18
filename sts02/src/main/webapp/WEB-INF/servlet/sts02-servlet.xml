@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- handlerMapping -->
+	<bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">   <!-- bean 을 하나하나 만들 수 있고, urlMap 으로 묶을 수 있다 -->
+			<props>
+				<prop key="/dept/list.bit">dlist</prop>
+				<prop key="/dept/add.bit">dadd</prop>
+				<prop key="/dept/delete.bit">ddel</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	<bean id="dlist" class="com.bit.controller.DeptListController">
+		<property name="dao" ref="dept01Dao2"/>
+	</bean>
+	<bean id="dadd" class="com.bit.controller.DeptAddController">
+		<property name="supportedMethods" value="POST"/>
+		<property name="commandClass" value="com.bit.model.entity.Dept01Vo"/>   <!-- 실행/구현할 때 필요한 class -->
+		<property name="commandName" value="bean"/>
+		<property name="dao" ref="dept01Dao2"/>
+	</bean>
+	<bean id="ddel" class="com.bit.controller.DeptDeleteController">   <!-- 삭제는 필요한 class 가 없으므로 supportMethods 만 사용 -->
+		<property name="supportedMethods" value="POST"/>
+		<property name="dao" ref="dept01Dao2"/>
+	</bean>
+
+	
+	<!-- viewResolver -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+</beans>
