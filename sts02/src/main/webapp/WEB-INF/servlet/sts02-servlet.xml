@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- handlerMapping -->
-	<bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="urlMap">   <!-- bean 을 하나하나 만들 수 있고, urlMap 으로 묶을 수 있다 -->
+	<bean id="handlerMapping" 
+	class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">   <!-- bean 으로 하나하나 만들어주거나, Map 으로 묶을 수도 있다 -->
 			<props>
 				<prop key="/dept/list.bit">dlist</prop>
 				<prop key="/dept/add.bit">dadd</prop>
 				<prop key="/dept/delete.bit">ddel</prop>
+				<prop key="/emp/list.bit">elist</prop>
+				<prop key="/emp/add.bit">eadd</prop>
+				<prop key="/emp/insert.bit">einsert</prop>
+				<prop key="/login.bit">login</prop>
+				<prop key="/result.bit">result</prop>
+				<prop key="/logout.bit">logout</prop>
 			</props>
 		</property>
 	</bean>
@@ -20,19 +29,95 @@
 	</bean>
 	<bean id="dadd" class="com.bit.controller.DeptAddController">
 		<property name="supportedMethods" value="POST"/>
-		<property name="commandClass" value="com.bit.model.entity.Dept01Vo"/>   <!-- 실행/구현할 때 필요한 class -->
+		<property name="commandClass" value="com.bit.model.entity.Dept01Vo"/>
 		<property name="commandName" value="bean"/>
 		<property name="dao" ref="dept01Dao2"/>
 	</bean>
-	<bean id="ddel" class="com.bit.controller.DeptDeleteController">   <!-- 삭제는 필요한 class 가 없으므로 supportMethods 만 사용 -->
+	<bean id="ddel" class="com.bit.controller.DeptDeleteController">
 		<property name="supportedMethods" value="POST"/>
 		<property name="dao" ref="dept01Dao2"/>
 	</bean>
-
+	
+	<bean id="elist" 
+	class="com.bit.controller.EmpListController">
+		<property name="dao" ref="empDao"/>
+	</bean>
+	
+	<bean id="eadd"
+	class="com.bit.controller.EmpAddController">
+		<property name="dao" ref="dept01Dao2"/>
+	</bean>
+	<bean id="einsert"
+	class="com.bit.controller.EmpInsertController">
+		<property name="dao" ref="empDao"/>
+	</bean>
+	
+	<bean id="login"
+	class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="login/login"/>
+	</bean>
+	
+	<bean id="result"
+	class="com.bit.controller.LoginController">
+		<property name="dao" ref="empDao"/>
+	</bean>
+	
+	<bean id="logout" class="com.bit.controller.LogoutController"></bean>
 	
 	<!-- viewResolver -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean id="viewResolver"
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
+	
+	<mvc:interceptors>   <!-- 컨트롤러에 들어오는 req, resp 을 가로채는 역할 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/emp/*"/>
+			<bean class="com.bit.util.BitInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

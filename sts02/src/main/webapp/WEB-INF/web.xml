@@ -5,14 +5,38 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
+<!--
+	contextConfigLocation
+	 - 환경설정 경로
+	 - 경로를 두 개 이상 가져올 수 있다
+	 - 각각의 경로를 각각의 context 를 각각의 dispatcherServlet 이 사용할 수 있다
+-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:/applicationContext.xml</param-value>
 	</context-param>
 	
-	<listener>
+	<listener>   <!-- 한 번 실행되고 끝 -->
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<filter>
+		<filter-name>characterEncoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>   <!-- 될수도 있고, 안될 수도 있다 /forceEncoding : encoding 을 적용하겠다-->
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>TRUE</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>characterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	
 	<servlet>
 		<servlet-name>sts02</servlet-name>

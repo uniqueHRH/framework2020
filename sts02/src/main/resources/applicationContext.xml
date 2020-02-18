@@ -93,29 +93,34 @@
 	</bean> -->
 	
 	
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	<bean id="dataSource" 
+	class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
 		<property name="url" value="jdbc:mysql://localhost:3306/class03?useUnicode=true&amp;characterEncoding=UTF-8"/>
 		<property name="username" value="scott2"/>
 		<property name="password" value="Hhr920728"/>
 	</bean>
 	
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="dataSource"/>
+	<bean id="jdbcTemplate" 
+		class="org.springframework.jdbc.core.JdbcTemplate">
+			<property name="dataSource" ref="dataSource"></property>		
+	</bean>
+	
+	<bean id="platformTransactionManager"
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
 	<bean id="dept01Dao1" class="com.bit.model.Dept01DaoImpl">
-		<property name="dataSource" ref="dataSource"/>		
+			<property name="dataSource" ref="dataSource"></property>		
+	</bean>
+	<bean id="dept01Dao2" class="com.bit.model.Dept01Dao2Impl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
 	
-	<bean id="dept01Dao2" class="com.bit.model.Dept01Dao2Impl">
-		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	<bean id="empDao" class="com.bit.model.Emp01DaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<property name="transactionManager" ref="platformTransactionManager"></property>
 	</bean>
 
 </beans>
-
-
-
-
-
-
