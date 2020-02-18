@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+
+	<bean id="module02" class="com.bit.sts04.module.Module02">
+		<property name="msg" value="class03"/>   <!-- name : setter 명 -->
+	</bean>
+
+	<bean id="module01" class="com.bit.sts04.module.Module01Impl">
+		<property name="module" ref="module02"/>
+	</bean>
+	
+	<bean id="beforeDecoration" class="com.bit.sts04.step01.BeforeDecoration"/>
+	
+	<bean id="afterSuccess" class="com.bit.sts04.step01.AfterSuccessDecoration"/>
+
+	<bean id="throwsAdvice" class="com.bit.sts04.step01.AfterFailDecoration"/>
+	
+	<bean id="aroundDecoration" class="com.bit.sts04.step01.AroundDecoration"/>
+	
+	<!-- <bean id="pointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">   이름이 매칭되는 메소드 실행
+		<property name="mappedNames">
+			<array>
+				<value>func01</value>
+				<value>func03</value>
+			</array>
+		</property>
+	</bean>
+	
+	<bean id="pointcutAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">   NAmeMatchMethodPointcut 과 custom 을 연결해주는 역할
+		<property name="pointcut" ref="pointcut"/>   어떤 class? / 참조 : NameMAtchMEthodPointcut
+		<property name="advice" ref="aroundDecoration"/>   어떤 advice / setter / 호출하는 것 / 참조 : custom
+	</bean> -->
+
+	<bean id="pointcutAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">   <!-- 위 주석구문을 이와같이 간결하게 사용이 가능하다 -->
+		<property name="advice" ref="aroundDecoration"/>									<!-- 두 구문을 하나로 합친것 -->
+		<property name="mappedNames">
+			<array>
+				<value>func01</value>
+				<value>func03</value>
+			</array>
+		</property>
+	</bean>
+	
+
+	<bean id="pointcut2" class="org.springframework.aop.support.JdkRegexpMethodPointcut">   <!-- func 이 포함되는 메소드 모두 실행 -->
+		<property name="pattern" value=".*func.*"/>   <!-- 앞의 .* : 메소드   /   뒤의 .* : 인자 -->
+	</bean>
+	
+	
+	
+	<!-- <bean id="afterDecoration" class="com.bit.sts04.step01.AfterDecoration"/> -->
+	
+<!-- 프록시
+	주기능에 여러기능을 추가하여, 한 객체에 여러기능을 넣는다
+ -->
+	<bean id="custom" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="module01"/>
+		<property name="interceptorNames">
+			<list>
+				<value>pointcutAdvisor</value>   <!-- 참조하는 bean 명을 적어준다 -->
+				<!-- <value>aroundDecoration</value>
+				<value>afterDecoration</value>
+				<value>beforeDecoration</value> -->
+			</list>
+		</property>
+	</bean>
+	
+</beans>
